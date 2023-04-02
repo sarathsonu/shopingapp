@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block metadescription %}
+
+        {{ product.description|truncatewords:150 }}
+
+
+
+{% endblock %}
+
+{% block title %}
+    {% if category %}
+        {{ product.name }} -NR traders shop
+
+    {% endif %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<br>
+<div class="row">
+    <div class="col-12 col-sm-12 col-md-12 col-lg-6 text-center">
+        <div style="min-width:18rem">
+            <img src="{{product.image.url}}"alt="{{product.name}}" width="350" height="330">
+        </div>
+    </div>
+
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6">
+            <div>
+            <h1 class="my_prod_tittle">{{product.name}}</h1>
+            <p>Rs{{product.price}}</p>
+            <h4 class="my_tittle">Product Description</h4>
+            <p class="text-justify my-rod-text">{{product.description}}</p>
+            {% if product.stock <= 0 %}
+            <p class="text-justify my-prod-text"><b>Out of stock</b></p>
+            {% else %}
+            <a class="btn btn-secondary" href="{% url 'cart:add_cart' product.id %}">Add to Cart</a>
+            {% endif %}
+
+        </div>
+        </div>
+</div>
+    </div>
+</div>
+{% endblock %}
